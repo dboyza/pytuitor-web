@@ -1,0 +1,10 @@
+# Pytuitor learner shell; your own dotfiles are not read or modified.
+HISTFILE="$ZDOTDIR/.zsh_history" HISTSIZE=5000 SAVEHIST=5000
+setopt PROMPT_SUBST INTERACTIVE_COMMENTS
+autoload -Uz compinit add-zsh-hook && compinit -u -d "$ZDOTDIR/.zcompdump"
+pytuitor_precmd() { print -Pn '\e]2;%1~\a' }
+pytuitor_preexec() { print -rn -- $'\e]2;'"${1%% *}"$'\a' }
+add-zsh-hook precmd pytuitor_precmd
+add-zsh-hook preexec pytuitor_preexec
+PROMPT='%F{blue}{{PY}} %f%F{yellow}${PYTUITOR_LABEL}%f %F{cyan}{{FOLDER}}  %1~%f %(?.%F{green}.%F{red}%? )❯%f '
+{{WELCOME}}

@@ -1,0 +1,11 @@
+# Pytuitor learner shell; your own dotfiles are not read or modified.
+HISTFILE="${BASH_SOURCE%/*}/.bash_history" HISTSIZE=5000
+pytuitor_prompt() {
+  local code=$?
+  pytuitor_status=$([ $code -eq 0 ] || printf '%s ' $code)
+  pytuitor_color=$([ $code -eq 0 ] && echo 32 || echo 31)
+  printf '\e]2;%s\a' "${PWD##*/}"
+}
+PROMPT_COMMAND=pytuitor_prompt
+PS1='\[\e[34m\]{{PY}} \[\e[33m\]${PYTUITOR_LABEL}\[\e[0m\] \[\e[36m\]{{FOLDER}}  \W\[\e[0m\] \[\e[${pytuitor_color}m\]${pytuitor_status}❯\[\e[0m\] '
+{{WELCOME}}

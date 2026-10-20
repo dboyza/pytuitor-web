@@ -15,7 +15,12 @@ from typing import TYPE_CHECKING
 
 from pytuitor_web.models import ProjectMilestone
 from pytuitor_web.platform_files import is_link, replace_profile, sync_directory
-from pytuitor_web.workspace import WorkspaceError, export_stage_backup, export_workspace, validate_files
+from pytuitor_web.workspace import (
+    WorkspaceError,
+    export_stage_backup,
+    export_workspace,
+    validate_files,
+)
 
 if TYPE_CHECKING:
     from pytuitor_web.state import Store
