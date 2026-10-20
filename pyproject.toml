@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pytuitor-web"
+dynamic = ["version"]
+description = "Learn Python in your browser, with a real terminal beside every lesson"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "uvicorn>=0.30,<1",
+    "websockets>=15,<17",
+    "platformdirs>=4,<5",
+    "pywinpty>=2.0.14,<4 ; sys_platform == 'win32'",
+    # Learners use these in the optional online chapter; checks stay offline.
+    "requests>=2.32,<3",
+    "pytest>=8,<9",
+]
+
+[project.scripts]
+pytuitor-web = "pytuitor_web.cli:main"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.27,<1",
+    "pytest-asyncio>=1,<2",
+    "pytest-timeout>=2,<3",
+    "ruff>=0.12,<1",
+]
+
+[tool.hatch.version]
+path = "src/pytuitor_web/__init__.py"
+
+[tool.hatch.build]
+artifacts = ["src/pytuitor_web/static/**"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pytuitor_web"]
+
+[tool.hatch.build.targets.sdist]
+exclude = ["/frontend/node_modules", "/frontend/*.tsbuildinfo", "**/__pycache__", "/.artifacts"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+timeout = 180
+timeout_method = "thread"
+
+[tool.ruff]
+line-length = 100
+extend-exclude = [".artifacts", "frontend"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
