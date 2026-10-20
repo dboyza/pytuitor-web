@@ -57,7 +57,8 @@ Respect rate limits, keep secret API keys out of your code, and expect real APIs
 
 ## Try it in your own terminal
 
-These steps need an internet connection and run outside Pytuitor.
+These steps need an internet connection.
+Use the terminal beside this lesson or one of your own.
 
 1. In a virtual environment with requests installed, request `https://api.github.com/repos/python/cpython` with `timeout=10`.
 2. Call `raise_for_status()`, then print `response.json()["stargazers_count"]`.

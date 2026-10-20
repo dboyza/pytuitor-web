@@ -86,7 +86,7 @@ def milestone(
         body=(
             f"# Lantern Reach: {title}\n\n{story}\n\n"
             "## Your growing game\n\n"
-            "Extend your previous working game using the requirements in the exercise pane. "
+            "Extend your previous working game using the requirements in the Extend tab. "
             "Your source stays yours: different implementations and "
             "extra creative details are welcome. "
             "Keep the documented commands and behavior so future chapters can build on them.\n\n"
@@ -96,8 +96,8 @@ def milestone(
             "A passing Extend saves a working checkpoint. "
             "Repair is a separate incident and cannot overwrite that checkpoint. "
             "Complete both stages, then choose Next.\n\n"
-            "Generated game saves appear in Run files: inspect and keep them before leaving. "
-            "The Game overview lets you revisit checkpoints or export a standalone game."
+            "Game saves you generate stay in the workspace folder and appear under Other files. "
+            "The Your game page lets you replay working versions or download a standalone game."
         ),
         repair=repair.starter_files["game.py"],
         checks=checks,

@@ -1,0 +1,139 @@
+/* Design tokens: Python blue and yellow accents on calm neutral grays. */
+
+@font-face {
+  font-family: "JetBrainsMono Nerd Font";
+  src: url("../fonts/JetBrainsMonoNerdFont-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "JetBrainsMono Nerd Font";
+  src: url("../fonts/JetBrainsMonoNerdFont-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "JetBrainsMono Nerd Font";
+  src: url("../fonts/JetBrainsMonoNerdFont-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: block;
+}
+
+:root {
+  color-scheme: dark;
+  --font-ui: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrainsMono Nerd Font", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --bg: #0e1013;
+  --bg-sunken: #0a0c0e;
+  --surface: #14171b;
+  --surface-2: #1a1e23;
+  --surface-3: #21262c;
+  --hover: rgba(255, 255, 255, 0.045);
+  --active: rgba(255, 255, 255, 0.075);
+  --border: #23282f;
+  --border-strong: #313842;
+
+  --text: #e8eaed;
+  --text-2: #aeb5bf;
+  --text-3: #7c8591;
+
+  --blue: #5b9fe0;
+  --blue-strong: #3776ab;
+  --blue-text: #8cc0f2;
+  --blue-soft: rgba(91, 159, 224, 0.13);
+  --blue-line: rgba(91, 159, 224, 0.4);
+  --yellow: #ffd343;
+  --yellow-text: #ffdd6e;
+  --yellow-soft: rgba(255, 211, 67, 0.1);
+  --yellow-line: rgba(255, 211, 67, 0.35);
+  --green: #4cc38a;
+  --green-text: #6fd6a3;
+  --green-soft: rgba(76, 195, 138, 0.12);
+  --green-line: rgba(76, 195, 138, 0.38);
+  --red: #f0777b;
+  --red-text: #f5999c;
+  --red-soft: rgba(240, 119, 123, 0.12);
+  --red-line: rgba(240, 119, 123, 0.38);
+
+  --brand-gradient: linear-gradient(135deg, #3776ab 0%, #5b9fe0 45%, #ffd343 100%);
+  --focus: 0 0 0 1.5px var(--bg), 0 0 0 3px var(--blue);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 28px 70px -12px rgba(0, 0, 0, 0.7);
+  --radius-sm: 6px;
+  --radius: 9px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* Syntax tokens, shared by the editor, lesson code, and diffs. */
+  --tk-keyword: #82aaff;
+  --tk-string: #a5d6a7;
+  --tk-number: #f6a776;
+  --tk-atom: #f6a776;
+  --tk-call: #ffd866;
+  --tk-def: #ffd866;
+  --tk-class: #7fdbca;
+  --tk-comment: #6b7480;
+  --tk-prop: #c3cee3;
+  --tk-op: #89ddff;
+  --tk-escape: #f78c6c;
+  --tk-var: #dfe3ea;
+  --tk-meta: #c792ea;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f5f7;
+  --bg-sunken: #fbfbfc;
+  --surface: #ffffff;
+  --surface-2: #f6f7f9;
+  --surface-3: #eef0f3;
+  --hover: rgba(15, 23, 42, 0.045);
+  --active: rgba(15, 23, 42, 0.075);
+  --border: #e2e5e9;
+  --border-strong: #cfd4da;
+
+  --text: #15181c;
+  --text-2: #4a525d;
+  --text-3: #6c7580;
+
+  --blue: #2f73b5;
+  --blue-strong: #3776ab;
+  --blue-text: #245f97;
+  --blue-soft: rgba(47, 115, 181, 0.1);
+  --blue-line: rgba(47, 115, 181, 0.35);
+  --yellow: #e8b100;
+  --yellow-text: #8a6400;
+  --yellow-soft: rgba(232, 177, 0, 0.12);
+  --yellow-line: rgba(232, 177, 0, 0.45);
+  --green: #1f9d63;
+  --green-text: #157049;
+  --green-soft: rgba(31, 157, 99, 0.1);
+  --green-line: rgba(31, 157, 99, 0.35);
+  --red: #d64550;
+  --red-text: #b4323d;
+  --red-soft: rgba(214, 69, 80, 0.09);
+  --red-line: rgba(214, 69, 80, 0.32);
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow: 0 12px 30px -10px rgba(15, 23, 42, 0.18), 0 2px 6px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 28px 64px -16px rgba(15, 23, 42, 0.28);
+
+  --tk-keyword: #2f5fbf;
+  --tk-string: #347a2f;
+  --tk-number: #b4530a;
+  --tk-atom: #b4530a;
+  --tk-call: #8a5a00;
+  --tk-def: #8a5a00;
+  --tk-class: #0e7490;
+  --tk-comment: #8a919b;
+  --tk-prop: #3a4a63;
+  --tk-op: #0b7285;
+  --tk-escape: #c2410c;
+  --tk-var: #1d232b;
+  --tk-meta: #7c3aed;
+}

@@ -25,7 +25,7 @@ Calling `double(4)` runs the body with `number` set to `4`.
 ## Return and print do different jobs
 
 `return` gives the caller a value to use.
-`print()` displays something in the console.
+`print()` displays something in the terminal.
 A function that finishes without `return` gives back `None`, the "no result" value you saw returned by `sort()`.
 
 ```python

@@ -60,6 +60,6 @@ Both comparisons are true, so this displays `Board the train`.
 
 ## Practice in the workspace
 
-Use the active exercise panel beside the editor for the current task requirements and cases.
+Use the Build tab above the lesson for the current task requirements and cases.
 Run the program with an answer from each branch and with an answer that matches no named case.
 Check includes boundary cases so you can see whether each comparison includes or excludes equality.

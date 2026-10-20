@@ -302,7 +302,7 @@ class Tutor:
                 "milestone": bool(lesson.project_id),
                 "build_label": lesson.build_label,
                 "chapter": {"id": chapter.id, "title": chapter.title},
-                "body": lesson.body,
+                "body": _body(lesson),
                 "brief": brief,
                 "outcome": outcome,
                 "origin": origin,
@@ -314,7 +314,7 @@ class Tutor:
                 "stages": self.stage_flags(lesson),
                 "completed": self.store.status(lesson) == "completed",
                 "note": note if isinstance(note, str) else "",
-                "checkpoint": bool(root.get("checkpoint")),
+                "checkpoint": root.get("checkpoint"),
             }
 
     def stage_flags(self, lesson: Lesson) -> dict[str, Any]:
@@ -722,9 +722,9 @@ class Tutor:
                     entry["checked_files"] = source
                     entry["checked_revision"] = lesson.revision
                     if self.mark_complete(lesson):
-                        summary = "Both stages passed. The lesson is complete."
+                        summary = "Both stages passed. Continue when you're ready."
                     else:
-                        summary = f"{lesson.build_label} passed. Repair is unlocked."
+                        summary = "Repair is unlocked: investigate and fix a separate program."
             else:
                 failed = next((case for case in result.checks if not case.get("passed")), None)
                 summary = failed["nudge"] if failed else "Read the error, edit, and Check again."
@@ -1131,6 +1131,15 @@ class Tutor:
             item["index"] = index + 1
             self.persist()
             return {"finished": False, "index": index + 1}
+
+
+def _body(lesson: Lesson) -> str:
+    """Drop a leading title and subtitle that the page header already shows."""
+    head, _, rest = lesson.body.lstrip().partition("\n")
+    if head.removeprefix("# ").removeprefix("Lantern Reach: ") != lesson.title:
+        return lesson.body
+    rest = rest.lstrip("\n")
+    return rest[len(lesson.subtitle) :].lstrip("\n") if rest.startswith(lesson.subtitle) else rest
 
 
 def _zip(files: dict[str, str], folder: str) -> bytes:

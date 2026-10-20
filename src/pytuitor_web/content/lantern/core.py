@@ -157,7 +157,7 @@ M5 = milestone(
     "and read with json.loads. Check the loaded structure before using it. "
     "CSV writers quote fields such as `tea, dried` correctly; do not "
     "join them with commas by hand. "
-    "Run files lets you keep generated saves between runs in Pytuitor.",
+    "Generated saves stay in your workspace folder between runs.",
     requirements="Keep the previous game API and commands. Add `save_game(state, path)` and "
     "`load_game(path)` using UTF-8 JSON. Loaded state must be a dictionary with a valid location "
     "(outpost/forest/ridge), quest (open/done), nonnegative integer "

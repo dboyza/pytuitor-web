@@ -42,7 +42,9 @@ def main() -> None:
     app, token = create_app(tutor, origin)
     link = f"{origin}/#token={token}"
     server = uvicorn.Server(
-        uvicorn.Config(app, host="127.0.0.1", port=port, log_level="warning", ws="websockets")
+        uvicorn.Config(
+            app, host="127.0.0.1", port=port, log_level="warning", ws="websockets-sansio"
+        )
     )
 
     def announce() -> None:
@@ -50,9 +52,12 @@ def main() -> None:
             if server.should_exit:
                 return
             threading.Event().wait(0.05)
-        print(f"\n  Pytuitor is running at {origin}")
-        print(f"  Open this one-time link to sign in: {link}")
-        print("  Press Ctrl+C to stop. Your progress is saved as you work.\n")
+        print(
+            f"\n  Pytuitor is running at {origin}\n"
+            f"  Open this one-time link to sign in: {link}\n"
+            "  Press Ctrl+C to stop. Your progress is saved as you work.\n",
+            flush=True,
+        )
         if not args.no_browser:
             webbrowser.open(link)
 

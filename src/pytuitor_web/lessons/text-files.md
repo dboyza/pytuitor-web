@@ -24,11 +24,10 @@ In Python source, `\n` inside a string represents a newline character.
 Trying to read a missing file raises `FileNotFoundError`.
 We will supply existing files for this exercise.
 
-The tutor runs your code in temporary copies of the workspace.
-When Run creates or changes eligible text files, a **Run files** button appears in the console.
-Open it to inspect each file, then choose **Save to workspace** to keep the files for later runs or exports.
-Saving first backs up your current stage, then adds or replaces the previewed files without deleting other files.
-Files are not saved automatically, and Check always discards its file changes.
+Run executes your program in this stage's workspace folder, the same folder the terminal opens in.
+Files your program creates or changes stay there, so later runs can read them.
+New files appear under Other files in the file list; add one to the workspace to edit it and include it in checks.
+Check copies only your workspace files into a fresh folder, so it never sees or keeps files from earlier runs.
 Binary files, such as images, do not contain ordinary text.
 Symbolic links point to another file or folder instead of containing their own data.
 Those files, and files beyond the workspace limits, are omitted from the preview.

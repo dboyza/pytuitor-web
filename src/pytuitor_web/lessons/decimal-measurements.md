@@ -41,6 +41,6 @@ For money, use whole-number cents when exact cent arithmetic is needed.
 
 ## Practice in the workspace
 
-Use the active exercise panel beside the editor for the current task requirements and examples.
+Use the Build tab above the lesson for the current task requirements and examples.
 Use Run to try both fractional input and values that should display trailing zeroes.
 Use Check to compare the stored number separately from its formatted text.

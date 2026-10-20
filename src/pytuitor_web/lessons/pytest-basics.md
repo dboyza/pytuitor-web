@@ -20,7 +20,8 @@ def test_area_of_a_square():
 ```
 
 When an assert fails, pytest prints both sides of the comparison, such as `assert 8 == 9`.
-In your own projects, run tests from a terminal with `python -m pytest`; in this chapter, Check runs them and shows pytest's report in the console.
+Run tests from a terminal with `python -m pytest`, including the terminal beside this lesson.
+Check also runs them and shows pytest's report in its results.
 
 ## Expect an error
 

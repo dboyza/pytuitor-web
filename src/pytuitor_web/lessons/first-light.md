@@ -71,8 +71,8 @@ Errors are clues you can use, not a sign that you cannot program.
 
 ## Practice in the workspace
 
-The editor is where you write code, and the console shows output and accepts answers when a program asks for input.
-Press **Ctrl+T** to move between the lesson, editor, and console.
-The active exercise panel beside the editor contains the current requirements.
-Press **Ctrl+R** to run the program and **F5** to check it.
+The editor is where you write code, and the terminal below it runs your program and accepts answers when it asks for input.
+The Build tab above this lesson contains the current requirements.
+Press Run, or Ctrl+Enter (⌘+Enter on a Mac), to run the program in the terminal.
+Press Check, or add Shift to that shortcut, to test it.
 When a check fails, read the output and error message before making one small change.

@@ -36,9 +36,9 @@ student = input("What is your name? ")
 print(student)
 ```
 
-Run this program, type `Ada` in the console when the question appears, and press Enter.
+Run this program, type `Ada` in the terminal when the question appears, and press Enter.
 The program continues and displays `Ada`.
-You do not type quotes around your answer in the console.
+You do not type quotes around your answer in the terminal.
 
 An answer from `input()` is always a string, even if you type digits.
 To calculate with a whole-number answer, convert it with `int()`:
@@ -68,6 +68,6 @@ The braces are not displayed.
 
 ## Practice in the workspace
 
-Use the active exercise panel beside the editor for the current task requirements.
-Use Run to try different answers in the console, then use Check to compare your program with several cases.
+Use the Build tab above the lesson for the current task requirements.
+Use Run to try different answers in the terminal, then use Check to compare your program with several cases.
 A hard-coded message uses one fixed value instead of the answer from `input()`, so it cannot respond to new answers.

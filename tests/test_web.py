@@ -78,9 +78,12 @@ def test_build_then_repair_completes_a_lesson(client):
 
     events = check(client, "first-light", "build")
     assert not events[-1]["passed"] and any(e["type"] == "case" for e in events)
-    assert client.post(
-        "/api/activities/first-light/stage", json={"stage": "repair"}, headers=HEADERS
-    ).status_code == 400
+    assert (
+        client.post(
+            "/api/activities/first-light/stage", json={"stage": "repair"}, headers=HEADERS
+        ).status_code
+        == 400
+    )
 
     reference = post(client, "/api/activities/first-light/stages/build/reference")["files"]
     for name, text in reference.items():

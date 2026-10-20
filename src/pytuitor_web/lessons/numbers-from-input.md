@@ -22,6 +22,6 @@ Ordinary `/` division gives a decimal number, called a `float`, even when the di
 
 ## Practice in the workspace
 
-Use the active exercise panel beside the editor for the current task requirements and input examples.
+Use the Build tab above the lesson for the current task requirements and input examples.
 Use Run to try boundary values such as zero and an exact multiple of 60.
 Use Check to compare your stored values and printed output with several cases.

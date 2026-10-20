@@ -54,7 +54,8 @@ Check the spelling and project page first, because attackers publish look-alike 
 
 ## Try it in your own terminal
 
-These steps need an internet connection and run outside Pytuitor.
+These steps need an internet connection.
+Use the terminal beside this lesson or one of your own.
 
 1. In a new practice folder, run `python -m venv .venv`.
 2. Install requests with the environment's Python, using the command for your system above.

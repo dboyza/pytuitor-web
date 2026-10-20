@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none">
+  <title>Pytuitor logo</title>
+  <desc>An open book with a terminal prompt, in Python blue and yellow.</desc>
+  <rect x="2" y="2" width="124" height="124" rx="32" fill="#151719" stroke="#343A40" stroke-width="2"/>
+  <path d="M64 38C51 29 34 27 20 31V91C35 87 51 89 64 98V38Z" fill="#3776AB"/>
+  <path d="M64 38C77 29 94 27 108 31V91C93 87 77 89 64 98V38Z" fill="#FFD343"/>
+  <path d="M34 49L45 59L34 69" stroke="#F4F5F6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M78 70H94" stroke="#151719" stroke-width="6" stroke-linecap="round"/>
+  <path d="M64 39V97" stroke="#151719" stroke-width="4"/>
+</svg>
