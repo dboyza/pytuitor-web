@@ -541,6 +541,13 @@ class Tutor:
                 "flags": self.stage_flags(lesson),
             }
 
+    def read_file(self, lesson_id: str, stage: str, name: str) -> dict[str, str]:
+        with self.lock:
+            files = self.draft_files(self.lesson(lesson_id), stage)
+            if name not in files:
+                raise LearningError(f"{name} is not part of this workspace.")
+            return {"content": files[name], "hash": fingerprint(files[name])}
+
     def save_file(self, lesson_id: str, stage: str, name: str, content: str) -> dict[str, Any]:
         with self.lock:
             lesson = self.lesson(lesson_id)

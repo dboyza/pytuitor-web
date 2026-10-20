@@ -434,7 +434,7 @@ function Palette({ onClose }: { onClose: () => void }) {
         return {
           id,
           title: item.title,
-          detail: `Ch ${chapter.number} · ${chapter.title} · ${item.concepts.slice(0, 3).join(", ")}`,
+          detail: `Ch ${chapter.number} · ${chapter.title} · ${item.subtitle}`,
           group: item.milestone ? "Game milestones" : "Lessons",
           icon: <StatusIcon status={state.statuses[id]} size={15} />,
           run: go(learnPath(id)),

@@ -112,10 +112,11 @@ export function Dialog({
   });
   useEffect(() => {
     const previous = document.activeElement as HTMLElement | null;
-    const first = panel.current?.querySelector<HTMLElement>(
-      "[data-autofocus], input, textarea, button.primary, button",
-    );
-    first?.focus();
+    // Prefer an explicit target, then a field, then the main action; never the close button.
+    const first = ["[data-autofocus]", "input, textarea", "button.primary"]
+      .map((selector) => panel.current?.querySelector<HTMLElement>(selector))
+      .find(Boolean);
+    (first ?? panel.current)?.focus();
     const key = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.stopPropagation();
@@ -152,6 +153,7 @@ export function Dialog({
         ref={panel}
         role="dialog"
         aria-modal="true"
+        tabIndex={-1}
         aria-label={typeof title === "string" ? title : undefined}
         className={`dialog ${wide ? "wide" : ""} ${className}`}
       >

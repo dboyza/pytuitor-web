@@ -42,7 +42,11 @@ const theme = EditorView.theme({
     backgroundColor: "transparent",
     color: "var(--tk-var)",
   },
-  ".cm-scroller": { fontFamily: "var(--font-mono)", lineHeight: "1.6" },
+  ".cm-scroller": {
+    fontFamily: "var(--font-mono)",
+    lineHeight: "1.6",
+    fontVariantLigatures: "none",
+  },
   ".cm-content": { padding: "14px 0 40vh", caretColor: "var(--yellow)" },
   ".cm-line": { padding: "0 18px 0 6px" },
   ".cm-gutters": {

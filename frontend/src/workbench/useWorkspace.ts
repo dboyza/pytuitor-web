@@ -31,6 +31,8 @@ export function useWorkspace(
   const [status, setStatus] = useState<SaveStatus>("saved");
   const latest = useRef<Record<string, string>>({});
   const saved = useRef<Record<string, string>>({});
+  // The server's fingerprint of each file as this tab last saw it.
+  const hashes = useRef<Record<string, string>>({});
   const timers = useRef(new Map<string, number>());
   const inflight = useRef(new Map<string, Promise<void>>());
   const callbacks = useRef({ onFlags, onError, onExternal });
@@ -44,6 +46,7 @@ export function useWorkspace(
     const files = Object.fromEntries(data.files.map((file) => [file.name, file.content]));
     latest.current = { ...files };
     saved.current = { ...files };
+    hashes.current = Object.fromEntries(data.files.map((file) => [file.name, file.hash]));
     setContents(files);
     setOrder(data.files.map((file) => file.name));
     setRequired(new Set(data.files.filter((file) => file.required).map((file) => file.name)));
@@ -71,6 +74,7 @@ export function useWorkspace(
         .then(() => api<{ hash: string; flags: Flags }>(`${base}/file`, { name, content }, "PUT"))
         .then((result) => {
           saved.current[name] = content;
+          hashes.current[name] = result.hash;
           callbacks.current.onFlags(result.flags);
           setStatus("saved");
         })
@@ -124,21 +128,37 @@ export function useWorkspace(
           inflight.current.has(name) ||
           latest.current[name] !== saved.current[name];
         const updates: Record<string, string> = {};
-        for (const [name, content] of Object.entries(poll.changed)) {
-          if (dirty(name)) continue;
+        const adopt = (name: string, content: string, external: boolean) => {
           updates[name] = content;
           latest.current[name] = content;
           saved.current[name] = content;
-          callbacks.current.onExternal(name);
+          hashes.current[name] = poll.files[name];
+          if (external) callbacks.current.onExternal(name);
+        };
+        for (const [name, hash] of Object.entries(poll.files)) {
+          if (dirty(name) || hash === hashes.current[name]) continue;
+          if (name in poll.changed) adopt(name, poll.changed[name], true);
+          else {
+            // Another tab saved this file; fetch the current text.
+            const file = await api<{ content: string; hash: string }>(
+              `${base}/file?name=${encodeURIComponent(name)}`,
+            );
+            if (stopped) return;
+            if (!dirty(name) && file.hash === hash) adopt(name, file.content, false);
+          }
         }
         const removed = Object.keys(latest.current).filter((name) => !(name in poll.files));
         for (const name of removed) {
           delete latest.current[name];
           delete saved.current[name];
+          delete hashes.current[name];
         }
         if (Object.keys(updates).length || removed.length) {
           setContents({ ...latest.current });
-          setOrder((names) => names.filter((name) => name in latest.current));
+          setOrder((names) => [
+            ...names.filter((name) => name in latest.current),
+            ...Object.keys(updates).filter((name) => !names.includes(name)),
+          ]);
         }
         setUntracked((previous) =>
           JSON.stringify(previous) === JSON.stringify(poll.untracked) ? previous : poll.untracked,

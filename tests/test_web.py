@@ -187,3 +187,65 @@ def test_review_prediction_and_code_tasks(client):
         assert post(client, path + "/check")["passed"]
         result = post(client, path + "/next")
     assert result["finished"]
+
+
+def test_another_tab_can_read_the_saved_text_and_its_fingerprint(client):
+    post(client, "/api/onboard")
+    post(client, "/api/activities/first-light/open")
+    saved = save(client, "first-light", "build", "lesson.py", "print('elsewhere')\n")
+    read = client.get("/api/activities/first-light/stages/build/file?name=lesson.py").json()
+    assert read == {"content": "print('elsewhere')\n", "hash": saved["hash"]}
+    poll = client.get("/api/activities/first-light/stages/build/poll").json()
+    assert poll["files"]["lesson.py"] == saved["hash"] and poll["changed"] == {}
+
+
+def test_lesson_pages_do_not_repeat_the_title_heading():
+    from pytuitor_web.curriculum import ACTIVITIES
+    from pytuitor_web.service import _body
+
+    for lesson in ACTIVITIES:
+        first = _body(lesson).lstrip().partition("\n")[0]
+        assert first.removeprefix("# ").removeprefix("Lantern Reach: ") != lesson.title, lesson.id
+
+
+def test_start_over_closes_shells_and_keeps_workspaces_as_a_backup(client):
+    post(client, "/api/onboard")
+    post(client, "/api/activities/first-light/open")
+    save(client, "first-light", "build", "lesson.py", "print('keep me')\n")
+    console = post(
+        client, "/api/activities/first-light/stages/build/consoles", {"cols": 80, "rows": 24}
+    )
+    result = post(client, "/api/restart")
+    assert not result["state"]["onboarded"]
+    assert open(os.path.join(result["backup"], "first-light", "build", "lesson.py")).read() == (
+        "print('keep me')\n"
+    )
+    deadline = time.monotonic() + 5
+    while time.monotonic() < deadline:
+        sessions = client.get("/api/consoles").json()
+        if not any(item["id"] == console["id"] and item["alive"] for item in sessions):
+            break
+        time.sleep(0.05)
+    assert not any(item["id"] == console["id"] and item["alive"] for item in sessions)
+
+
+def test_playing_a_checkpoint_runs_the_game_in_a_temporary_folder(client):
+    from pytuitor_web.project_catalog import MILESTONES
+
+    first = MILESTONES[0].lesson
+    post(client, "/api/onboard")
+    post(client, f"/api/activities/{first.id}/open")
+    for name, text in first.stage_contract("build").reference_files.items():
+        save(client, first.id, "build", name, text)
+    assert check(client, first.id, "build")[-1]["passed"]
+    identifier = client.get("/api/game").json()["checkpoints"][0]["id"]
+    console = post(client, f"/api/game/checkpoints/{identifier}/play", {"cols": 80, "rows": 24})
+    with client.websocket_connect(
+        f"/api/consoles/{console['id']}/stream", headers={"origin": ORIGIN}
+    ) as socket:
+        seen = b""
+        deadline = time.monotonic() + 15
+        while b"name" not in seen.lower() and time.monotonic() < deadline:
+            seen += socket.receive_bytes()
+    assert b"name" in seen.lower()
+    post(client, f"/api/consoles/{console['id']}/close")

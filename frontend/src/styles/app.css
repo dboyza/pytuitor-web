@@ -54,8 +54,14 @@ textarea {
 code,
 kbd,
 pre,
-.mono {
+.mono,
+.cm-editor {
   font-family: var(--font-mono);
+  /* Learners must see the characters they type, so `<=` never becomes one glyph. */
+  font-variant-ligatures: none;
+  font-feature-settings:
+    "liga" 0,
+    "calt" 0;
 }
 :focus-visible {
   outline: none;
@@ -64,7 +70,11 @@ pre,
 ::selection {
   background: var(--blue-soft);
 }
-/* Editors and terminals show focus on their pane instead of on the hidden input. */
+/* Text fields, editors, and terminals show focus on their container instead. */
+input:focus-visible,
+textarea:focus-visible {
+  box-shadow: none;
+}
 .cm-editor :focus-visible,
 .xterm :focus-visible {
   box-shadow: none;
@@ -1868,6 +1878,18 @@ code.block.path {
   margin: 0;
   padding: 0;
 }
+.new-file input {
+  width: 100%;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 7px;
+  border: 1px solid var(--blue);
+  background: var(--bg-sunken);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  outline: none;
+  margin-bottom: 2px;
+}
 .explorer-note {
   font-size: 11.5px;
   color: var(--text-3);
@@ -2945,7 +2967,7 @@ code.block.path {
   background: var(--green);
 }
 .review-session {
-  max-width: 1280px;
+  max-width: 1180px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -2979,7 +3001,7 @@ code.block.path {
   gap: 14px;
 }
 .review-body:has(> :only-child) {
-  grid-template-columns: minmax(0, 760px);
+  grid-template-columns: minmax(0, 1fr);
 }
 .review-prompt {
   padding: 24px 26px;
@@ -3394,7 +3416,8 @@ code.block.path {
   .stage-switch button {
     padding: 0 8px 0 5px;
   }
-  .topbar .crumbs a {
+  .topbar .crumbs a,
+  .topbar .crumbs a + svg {
     display: none;
   }
 }

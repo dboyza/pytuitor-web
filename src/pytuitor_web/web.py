@@ -239,6 +239,10 @@ def create_app(tutor: Tutor, origin: str) -> tuple[FastAPI, str]:
     def poll(lesson_id: str, stage: str) -> dict[str, Any]:
         return tutor.poll(lesson_id, stage)
 
+    @app.get(stage_path + "/file")
+    def read_file(lesson_id: str, stage: str, name: str) -> dict[str, str]:
+        return tutor.read_file(lesson_id, stage, name)
+
     @app.put(stage_path + "/file")
     def save_file(lesson_id: str, stage: str, body: FileText) -> dict[str, Any]:
         return tutor.save_file(lesson_id, stage, body.name, body.content)
