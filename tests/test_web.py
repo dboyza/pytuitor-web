@@ -55,8 +55,10 @@ def test_requests_need_the_session_cookie_and_same_origin(tmp_path):
     with TestClient(app) as browser:
         assert browser.get("/api/state").status_code == 401
         forged = {"origin": "http://evil.example", "x-pytuitor": "1"}
-        assert browser.post("/api/session", json={"token": token}, headers=forged).status_code == 403
-        assert browser.post("/api/session", json={"token": "wrong"}, headers=HEADERS).status_code
+        sign_in = {"token": token}
+        assert browser.post("/api/session", json=sign_in, headers=forged).status_code == 403
+        wrong = browser.post("/api/session", json={"token": "wrong"}, headers=HEADERS)
+        assert wrong.status_code == 401
         assert browser.post("/api/session", json={"token": token}, headers=HEADERS).is_success
         assert browser.get("/api/state").is_success
         again = browser.post("/api/session", json={"token": token}, headers=HEADERS)
