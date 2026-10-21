@@ -99,4 +99,5 @@ Read [the architecture guide](docs/architecture.md) before changing sign-in, wor
 ## License
 
 Pytuitor Web is available under the [MIT License](LICENSE).
-The bundled JetBrains Mono Nerd Font and Inter fonts are distributed under the [SIL Open Font License](frontend/src/fonts/OFL.txt).
+The bundled JetBrains Mono Nerd Font is distributed under the [SIL Open Font License](frontend/src/fonts/OFL.txt).
+The Inter interface font comes from its npm package under its own SIL Open Font License.
