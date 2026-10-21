@@ -95,3 +95,8 @@ Read [the architecture guide](docs/architecture.md) before changing sign-in, wor
 - **Learn:** follow the [curriculum map](docs/curriculum.md) or the [Lantern Reach guide](docs/lantern-reach.md).
 - **Contribute content:** use the [authoring guide](docs/authoring.md) and [challenge criteria](docs/teaching-criteria.md), then run `scripts/check.sh`.
 - **Report a problem:** [open an issue](https://github.com/dboyza/pytuitor-web/issues) with your operating system, browser, the lesson and stage, what you ran or checked, and the terminal output from `pytuitor-web`.
+
+## License
+
+Pytuitor Web is available under the [MIT License](LICENSE).
+The bundled JetBrains Mono Nerd Font and Inter fonts are distributed under the [SIL Open Font License](frontend/src/fonts/OFL.txt).
