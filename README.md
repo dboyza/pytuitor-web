@@ -9,7 +9,8 @@ Offline, with no account.</p>
   <a href="#start-learning">Start learning</a> ·
   <a href="#preview">Preview</a> ·
   <a href="docs/curriculum.md">Curriculum</a> ·
-  <a href="docs/architecture.md">Architecture</a>
+  <a href="docs/architecture.md">Architecture</a> ·
+  <a href="https://github.com/dboyza/pytuitor-web/issues">Report an issue</a>
 </p>
 <p align="center"><strong>84 lessons</strong> &nbsp;/&nbsp; <strong>22 game milestones</strong> &nbsp;/&nbsp; <strong>22 chapters</strong></p>
 
@@ -19,9 +20,9 @@ You need [uv](https://docs.astral.sh/uv/getting-started/installation/) and, to b
 The first commands download the JavaScript and Python dependencies; uv also downloads Python 3.11+ if needed.
 Learning works offline afterward.
 
-From the repository root:
-
 ```sh
+git clone https://github.com/dboyza/pytuitor-web.git
+cd pytuitor-web
 npm --prefix frontend ci
 npm --prefix frontend run build
 uv run pytuitor-web
@@ -93,4 +94,4 @@ Read [the architecture guide](docs/architecture.md) before changing sign-in, wor
 
 - **Learn:** follow the [curriculum map](docs/curriculum.md) or the [Lantern Reach guide](docs/lantern-reach.md).
 - **Contribute content:** use the [authoring guide](docs/authoring.md) and [challenge criteria](docs/teaching-criteria.md), then run `scripts/check.sh`.
-- **Report a problem:** include your operating system, browser, the lesson and stage, what you ran or checked, and the terminal output from `pytuitor-web`.
+- **Report a problem:** [open an issue](https://github.com/dboyza/pytuitor-web/issues) with your operating system, browser, the lesson and stage, what you ran or checked, and the terminal output from `pytuitor-web`.
